@@ -1,0 +1,642 @@
+﻿@{
+
+    ViewData["Title"] = "Kategori Listesi";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+@model List<AdminResultCategoryDto>
+@{
+    ViewData["Title"] = "Kategori Listesi";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --bg:         #eef0f7;
+        --surface:    #ffffff;
+        --surface2:   #f5f6fb;
+        --border:     rgba(30,40,100,0.08);
+        --border-h:   rgba(30,40,100,0.16);
+        --accent:     #5b4ef8;
+        --accent-dim: rgba(91,78,248,0.09);
+        --accent-glow:rgba(91,78,248,0.2);
+        --gold:       #b07400;
+        --gold-dim:   rgba(176,116,0,0.09);
+        --green:      #0a9060;
+        --green-dim:  rgba(10,144,96,0.09);
+        --red:        #cc3333;
+        --red-dim:    rgba(204,51,51,0.08);
+        --amber:      #a86000;
+        --amber-dim:  rgba(168,96,0,0.09);
+        --blue:       #2563eb;
+        --blue-dim:   rgba(37,99,235,0.08);
+        --purple:     #7c3aed;
+        --purple-dim: rgba(124,58,237,0.08);
+        --text:       #181830;
+        --text-2:     #52527a;
+        --text-3:     #9898b8;
+        --radius:     10px;
+        --row-h:      62px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    .ct {
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        padding: 2rem 2.5rem 3rem;
+        color: var(--text);
+    }
+
+    .ct-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+        flex-wrap: wrap;
+    }
+
+    .ct-breadcrumb {
+        font-size: 0.75rem;
+        color: var(--text-3);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+    }
+
+    .ct-heading {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    .ct-pill {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        font-weight: 500;
+        color: var(--accent);
+        background: var(--accent-dim);
+        border: 1px solid rgba(91,78,248,0.2);
+        padding: 0.2rem 0.55rem;
+        border-radius: 6px;
+        align-self: flex-end;
+        margin-bottom: 2px;
+    }
+
+    .ct-spacer { flex: 1; }
+    .ct-toolbar { display: flex; align-items: center; gap: 0.6rem; }
+
+    .ct-search { position: relative; display: flex; align-items: center; }
+
+    .ct-search svg {
+        position: absolute; left: 0.75rem;
+        color: var(--text-3); width: 14px; height: 14px;
+        pointer-events: none;
+    }
+
+    .ct-search input {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.5rem 0.9rem 0.5rem 2.25rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.825rem;
+        color: var(--text);
+        width: 210px;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s, width 0.25s;
+    }
+
+    .ct-search input::placeholder { color: var(--text-3); }
+
+    .ct-search input:focus {
+        border-color: rgba(91,78,248,0.4);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+        width: 270px;
+    }
+
+    /* shell */
+    .ct-shell {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .ct-shell::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--accent) 40%, rgba(91,78,248,0.3) 70%, transparent 100%);
+        opacity: 0.5;
+    }
+
+    /* table */
+    .ct-table { width: 100%; border-collapse: collapse; table-layout: auto; }
+
+    .ct-table thead th {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        padding: 0 1rem;
+        height: 42px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface2);
+        white-space: nowrap;
+    }
+
+    .ct-table thead th:first-child { padding-left: 1.5rem; }
+   .ct-table thead th:last-child  { padding-right: 1.5rem; text-align: left; }
+    .ct-table thead th.sortable { cursor: pointer; user-select: none; }
+    .ct-table thead th.sortable:hover { color: var(--text-2); }
+    .ct-table thead th svg { width: 10px; height: 10px; display: inline; margin-left: 4px; vertical-align: middle; }
+
+    .ct-table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+        opacity: 0;
+        animation: fadeRow 0.35s ease forwards;
+    }
+
+    @@keyframes fadeRow {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ct-table tbody tr:last-child { border-bottom: none; }
+    .ct-table tbody tr:hover { background: rgba(91,78,248,0.035); }
+
+    .ct-table tbody tr:nth-child(1)  { animation-delay: 0.04s; }
+    .ct-table tbody tr:nth-child(2)  { animation-delay: 0.08s; }
+    .ct-table tbody tr:nth-child(3)  { animation-delay: 0.12s; }
+    .ct-table tbody tr:nth-child(4)  { animation-delay: 0.16s; }
+    .ct-table tbody tr:nth-child(5)  { animation-delay: 0.20s; }
+    .ct-table tbody tr:nth-child(6)  { animation-delay: 0.24s; }
+    .ct-table tbody tr:nth-child(7)  { animation-delay: 0.28s; }
+    .ct-table tbody tr:nth-child(8)  { animation-delay: 0.32s; }
+    .ct-table tbody tr:nth-child(9)  { animation-delay: 0.36s; }
+    .ct-table tbody tr:nth-child(10) { animation-delay: 0.40s; }
+
+    .ct-table tbody td {
+        padding: 0 1rem;
+        height: var(--row-h);
+        font-size: 0.875rem;
+        color: var(--text);
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .ct-table tbody td:first-child { padding-left: 1.5rem; }
+    .ct-table tbody td:last-child  { padding-right: 1.5rem; }
+
+    /* cells */
+    .ct-id {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        color: var(--text-3);
+    }
+
+    .ct-name-wrap {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+
+    /* colored icon box */
+    .ct-icon-box {
+        width: 32px; height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 0.9rem;
+    }
+
+    .ct-name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: -0.01em;
+    }
+
+    /* metric chips */
+    .ct-metric {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 0.25rem 0.65rem;
+        border-radius: 6px;
+        border: 1px solid transparent;
+    }
+
+    .ct-metric svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+    .ct-metric.films {
+        color: var(--blue);
+        background: var(--blue-dim);
+        border-color: rgba(37,99,235,0.14);
+    }
+
+    .ct-metric.reviews {
+        color: var(--purple);
+        background: var(--purple-dim);
+        border-color: rgba(124,58,237,0.14);
+    }
+
+    .ct-metric.rating {
+        color: var(--gold);
+        background: var(--gold-dim);
+        border-color: rgba(176,116,0,0.14);
+    }
+
+    .ct-metric.rating svg { fill: var(--gold); stroke: none; }
+
+    /* rating with mini bar */
+    .ct-rating-wrap { display: flex; flex-direction: column; gap: 0.3rem; }
+
+    .ct-bar-bg {
+        width: 60px; height: 3px;
+        background: rgba(176,116,0,0.12);
+        border-radius: 99px;
+        overflow: hidden;
+    }
+
+    .ct-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #e6a817, #f0c040);
+        border-radius: 99px;
+    }
+
+    .ct-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 0.25rem 0.65rem;
+        border-radius: 100px;
+    }
+
+    .ct-status-dot {
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+    }
+
+    .ct-status.on  { color: var(--green); background: var(--green-dim); border: 1px solid rgba(10,144,96,0.2); }
+    .ct-status.off { color: var(--red);   background: var(--red-dim);   border: 1px solid rgba(204,51,51,0.2); }
+
+    /* actions */
+    .ct-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.3rem;
+        flex-wrap: nowrap;
+    }
+
+    .ct-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        height: 30px;
+        padding: 0 0.65rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text-2);
+        cursor: pointer;
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+        flex-shrink: 0;
+    }
+
+    .ct-btn svg { width: 13px; height: 13px; }
+    .ct-btn:hover { transform: translateY(-1px); }
+
+    .ct-btn.det:hover {
+        background: var(--accent-dim);
+        border-color: rgba(91,78,248,0.22);
+        color: var(--accent);
+    }
+
+    .ct-btn.upd:hover {
+        background: var(--amber-dim);
+        border-color: rgba(168,96,0,0.2);
+        color: var(--amber);
+    }
+
+    .ct-btn.del:hover {
+        background: var(--red-dim);
+        border-color: rgba(204,51,51,0.2);
+        color: var(--red);
+    }
+
+    .ct-sep { width: 1px; height: 18px; background: var(--border); flex-shrink: 0; }
+
+    /* footer */
+    .ct-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface2);
+    }
+
+    .ct-footer-info { font-size: 0.78rem; color: var(--text-3); }
+    .ct-footer-info strong { color: var(--text-2); font-weight: 600; }
+
+    .ct-add-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.55rem 1.1rem;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .ct-add-btn svg { width: 14px; height: 14px; }
+
+    .ct-add-btn:hover {
+        background: #7c6dfa;
+        box-shadow: 0 6px 22px rgba(91,78,248,0.35);
+        transform: translateY(-1px);
+    }
+
+    .ct-empty { text-align: center; padding: 4rem 2rem; color: var(--text-3); }
+    .ct-empty svg { width: 40px; height: 40px; margin-bottom: 0.75rem; opacity: 0.25; }
+    .ct-empty p { font-size: 0.875rem; }
+</style>
+
+<div class="ct">
+
+    <div class="ct-top">
+        <div>
+            <div class="ct-breadcrumb">Admin / Kategoriler</div>
+            <div style="display:flex;align-items:baseline;gap:0.6rem">
+                <h1 class="ct-heading">Kategori Listesi</h1>
+                <span class="ct-pill">@Model.Count kayıt</span>
+            </div>
+        </div>
+
+        <div class="ct-spacer"></div>
+
+        <div class="ct-toolbar">
+            <div class="ct-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" id="ctSearch" placeholder="Kategori ara…" autocomplete="off">
+            </div>
+        </div>
+    </div>
+
+    <div class="ct-shell">
+        <div style="overflow-x:auto">
+            <table class="ct-table" id="ctTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th class="sortable" data-col="1">
+                            Kategori Adı
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5"/><path d="M7 9l5-5 5 5"/></svg>
+                        </th>
+                        <th class="sortable" data-col="2">
+                            Film Sayısı
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5"/><path d="M7 9l5-5 5 5"/></svg>
+                        </th>
+                        <th class="sortable" data-col="3">
+                            Yorum Sayısı
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5"/><path d="M7 9l5-5 5 5"/></svg>
+                        </th>
+                        <th class="sortable" data-col="4">
+                            Ort. Rating
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15l5 5 5-5"/><path d="M7 9l5-5 5 5"/></svg>
+                        </th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="ctBody">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><span class="ct-id">@item.CategoryId</span></td>
+
+                            <td>
+                                <div class="ct-name-wrap">
+                                    <span class="ct-icon-box" data-icon-id="@item.CategoryId"></span>
+                                    <span class="ct-name">@item.CategoryName</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="ct-metric films">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                                        <path d="M10 9l5 3-5 3V9z"/>
+                                    </svg>
+                                    @item.MovieCount
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="ct-metric reviews">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                    @item.ReviewCount
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="ct-rating-wrap">
+                                    <span class="ct-metric rating">
+                                        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                        @item.AvgRating.ToString("F2")
+                                    </span>
+                                    <div class="ct-bar-bg">
+                                        <div class="ct-bar-fill" style="width:@((item.AvgRating / 10.0 * 100).ToString("F1", System.Globalization.CultureInfo.InvariantCulture))%"></div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                @if (item.IsActive)
+                                {
+                                    <span class="ct-status on"><span class="ct-status-dot"></span>Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="ct-status off"><span class="ct-status-dot"></span>Pasif</span>
+                                }
+                            </td>
+
+                            <td>
+                                    <a href="/Admin/AdminCategory/DetailsCategory?id=@item.CategoryId" class="ct-btn det">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                            <circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                        Detay
+                                    </a>
+                                    <a href="/Admin/AdminCategory/UpdateCategory?id=@item.CategoryId" class="ct-btn upd">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                        </svg>
+                                        Düzenle
+                                    </a>
+                                    <span class="ct-sep"></span>
+                                    <a href="/Admin/AdminCategory/DeleteCategory/@item.CategoryId" class="ct-btn del">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="3 6 5 6 21 6"/>
+                                            <path d="M19 6l-1 14H6L5 6"/>
+                                            <path d="M10 11v6M14 11v6"/>
+                                            <path d="M9 6V4h6v2"/>
+                                        </svg>
+                                        Sil
+                                    </a>
+                                    </td>
+                             
+                           
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6">
+                            <div class="ct-empty">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M3 7h18M3 12h18M3 17h18"/>
+                                </svg>
+                                <p>Henüz kategori eklenmemiş.</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="ct-footer">
+            <span class="ct-footer-info">
+                Toplam <strong>@Model.Count</strong> kategori &nbsp;·&nbsp;
+                <span id="ctVisible">@Model.Count</span> gösteriliyor
+            </span>
+            <a href="/Admin/AdminCategory/CreateCategory" class="ct-add-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M5 12h14"/>
+                </svg>
+                Yeni Kategori Ekle
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+(function () {
+    // Kategorilere renkli ikon kutusu ata
+    const palette = [
+        { bg: 'rgba(91,78,248,0.12)',  color: '#5b4ef8', emoji: '🎬' },
+        { bg: 'rgba(10,144,96,0.12)',  color: '#0a9060', emoji: '🌿' },
+        { bg: 'rgba(176,116,0,0.12)', color: '#b07400', emoji: '⭐' },
+        { bg: 'rgba(204,51,51,0.12)', color: '#cc3333', emoji: '🔥' },
+        { bg: 'rgba(37,99,235,0.12)', color: '#2563eb', emoji: '💫' },
+        { bg: 'rgba(124,58,237,0.12)',color: '#7c3aed', emoji: '🎭' },
+        { bg: 'rgba(8,145,178,0.12)', color: '#0891b2', emoji: '🌊' },
+        { bg: 'rgba(180,83,9,0.12)',  color: '#b45309', emoji: '🎪' },
+        { bg: 'rgba(22,163,74,0.12)', color: '#16a34a', emoji: '🎯' },
+        { bg: 'rgba(220,38,38,0.12)', color: '#dc2626', emoji: '❤️' },
+        { bg: 'rgba(147,51,234,0.12)',color: '#9333ea', emoji: '🔮' },
+        { bg: 'rgba(2,132,199,0.12)', color: '#0284c7', emoji: '🎵' },
+    ];
+
+    document.querySelectorAll('[data-icon-id]').forEach((el, i) => {
+        const p = palette[i % palette.length];
+        el.style.background = p.bg;
+        el.style.color = p.color;
+        el.textContent = p.emoji;
+    });
+
+    // Arama
+    const searchEl  = document.getElementById('ctSearch');
+    const bodyEl    = document.getElementById('ctBody');
+    const visibleEl = document.getElementById('ctVisible');
+
+    function updateVisible() {
+        let count = 0;
+        bodyEl.querySelectorAll('tr').forEach(r => { if (r.style.display !== 'none') count++; });
+        if (visibleEl) visibleEl.textContent = count;
+    }
+
+    searchEl?.addEventListener('input', function () {
+        const q = this.value.toLowerCase().trim();
+        bodyEl.querySelectorAll('tr').forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+        updateVisible();
+    });
+
+    // Sıralama
+    let sortState = { col: null, asc: true };
+
+    document.querySelectorAll('th.sortable').forEach(th => {
+        th.addEventListener('click', function () {
+            const col = parseInt(this.dataset.col);
+            if (sortState.col === col) sortState.asc = !sortState.asc;
+            else { sortState.col = col; sortState.asc = true; }
+
+            const rows = Array.from(bodyEl.querySelectorAll('tr'));
+            rows.sort((a, b) => {
+                const aVal = a.cells[col]?.textContent.trim() ?? '';
+                const bVal = b.cells[col]?.textContent.trim() ?? '';
+                const aNum = parseFloat(aVal.replace(',', '.'));
+                const bNum = parseFloat(bVal.replace(',', '.'));
+                if (!isNaN(aNum) && !isNaN(bNum))
+                    return sortState.asc ? aNum - bNum : bNum - aNum;
+                return sortState.asc
+                    ? aVal.localeCompare(bVal, 'tr')
+                    : bVal.localeCompare(aVal, 'tr');
+            });
+
+            rows.forEach(r => bodyEl.appendChild(r));
+        });
+    });
+})();
+</script>

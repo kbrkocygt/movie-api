@@ -1,0 +1,12 @@
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/bin/Debug/net9.0/MovieApi.Dto.deps.json
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/bin/Debug/net9.0/MovieApi.Dto.dll
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/bin/Debug/net9.0/MovieApi.Dto.pdb
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.AssemblyInfoInputs.cache
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.AssemblyInfo.cs
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.csproj.CoreCompileInputs.cache
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.sourcelink.json
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.dll
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/refint/MovieApi.Dto.dll
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/MovieApi.Dto.pdb
+/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.Dto/obj/Debug/net9.0/ref/MovieApi.Dto.dll

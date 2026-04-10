@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Features/CQRSDesignPattern/Commands/" />
+    <Folder Include="Features/CQRSDesignPattern/Commands/CategoryCommands/" />
+    <Folder Include="Features/CQRSDesignPattern/Commands/MovieCommand/" />
+    <Folder Include="Features/CQRSDesignPattern/Commands/SeriesCommand/" />
+    <Folder Include="Features/CQRSDesignPattern/Commands/UserRegisterCommand/" />
+    <Folder Include="Features/CQRSDesignPattern/Handlers/MovieHandlers/" />
+    <Folder Include="Features/CQRSDesignPattern/Handlers/SeriesHandlers/" />
+    <Folder Include="Features/CQRSDesignPattern/Handlers/UserRegisterHandlers/" />
+    <Folder Include="Features/CQRSDesignPattern/Queries/" />
+    <Folder Include="Features/CQRSDesignPattern/Queries/CategoryQueries/" />
+    <Folder Include="Features/CQRSDesignPattern/Queries/MovieQueries/" />
+    <Folder Include="Features/CQRSDesignPattern/Queries/SeriesQueries/" />
+    <Folder Include="Features/CQRSDesignPattern/Results/SeriesResult/" />
+    <Folder Include="Features/MediatorDesignPattern/Commands/TagCommands/" />
+    <Folder Include="Features/MediatorDesignPattern/Handlers/" />
+    <Folder Include="Features/MediatorDesignPattern/Handlers/CastHandlers/" />
+    <Folder Include="Features/MediatorDesignPattern/Handlers/ReviewHandlers/" />
+    <Folder Include="Features/MediatorDesignPattern/Handlers/TagHandlers/" />
+    <Folder Include="Features/MediatorDesignPattern/Queries/CastQueries/" />
+    <Folder Include="Features/MediatorDesignPattern/Queries/ReviewQueries/" />
+    <Folder Include="Features/MediatorDesignPattern/Results/" />
+    <Folder Include="Features/MediatorDesignPattern/Results/CastResults/" />
+    <Folder Include="Features/MediatorDesignPattern/Results/ReviewResults/" />
+    <Folder Include="Features/MediatorDesignPattern/Results/TagResults/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../Infrastructure/MovieApi.Persistence/MovieApi.Persistence.csproj" />
+    <ProjectReference Include="../MovieApi.Domain/MovieApi.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+</Project>

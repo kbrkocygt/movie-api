@@ -1,0 +1,102 @@
+[
+  {
+    "title": "The Shawshank Redemption",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+    "rating": 9.3,
+    "description": "Andy Dufresne, işlemediğini söylediği bir suç nedeniyle Shawshank Hapishanesi’ne gönderilir. Yıllar içinde kurduğu dostluklar ve umudu bırakmayan tavrı, onu hem içeride hem dışarıda dönüştürür. Sabır, direnç ve özgürlük arzusu üzerine güçlü bir hikâye sunar.",
+    "duration": 142,
+    "releaseDate": "1994-09-23T00:00:00.000Z",
+    "createdYear": "1994",
+    "status": true
+  },
+  {
+    "title": "The Godfather",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+    "rating": 9.2,
+    "description": "Corleone ailesinin başındaki Don Vito’nun kurduğu düzen, güç savaşlarıyla sarsılır. Ailenin içine istemeden çekilen Michael, zamanla soğukkanlı bir lidere dönüşür. Sadakat, aile bağları ve iktidarın bedeli üzerine epik bir suç anlatısıdır.",
+    "duration": 175,
+    "releaseDate": "1972-03-24T00:00:00.000Z",
+    "createdYear": "1972",
+    "status": true
+  },
+  {
+    "title": "The Dark Knight",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+    "rating": 9.0,
+    "description": "Gotham’da suçla savaşan Batman, bu kez kaosun vücut bulmuş hali Joker ile karşı karşıyadır. Şehir ahlaki sınırların zorlandığı bir savaşa sürüklenir. Kahramanlık, adalet ve fedakârlık üzerine karanlık ve etkileyici bir yolculuktur.",
+    "duration": 152,
+    "releaseDate": "2008-07-18T00:00:00.000Z",
+    "createdYear": "2008",
+    "status": true
+  },
+  {
+    "title": "Inception",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+    "rating": 8.8,
+    "description": "Dom Cobb, insanların rüyalarına girerek sır çalan yetenekli bir hırsızdır. Bu kez görevi bir fikri bilinçaltına yerleştirmektir. Katman katman rüyalar arasında ilerleyen ekip, gerçeklik ve zaman algısının çözüldüğü tehlikeli bir plana girişir.",
+    "duration": 148,
+    "releaseDate": "2010-07-16T00:00:00.000Z",
+    "createdYear": "2010",
+    "status": true
+  },
+  {
+    "title": "Pulp Fiction",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+    "rating": 8.9,
+    "description": "Los Angeles suç dünyasında kesişen hikâyeler; tetikçiler, boksörler ve beklenmedik olaylar etrafında parçalı bir anlatıyla birleşir. Kara mizah ve hızlı diyaloglarla ilerleyen film, karakterlerin seçimlerini çarpıcı biçimde gözler önüne serer.",
+    "duration": 154,
+    "releaseDate": "1994-10-14T00:00:00.000Z",
+    "createdYear": "1994",
+    "status": true
+  },
+  {
+    "title": "Forrest Gump",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
+    "rating": 8.8,
+    "description": "Forrest, saf kalbi ve azmiyle hayatın onu sürüklediği her yerde iz bırakır. Çocukluk aşkı Jenny’ye duyduğu bağlılık, onu savaşlardan spor sahalarına uzanan bir yolculuğa taşır. Umut ve sevginin gücünü anlatan dokunaklı bir hikâyedir.",
+    "duration": 142,
+    "releaseDate": "1994-07-06T00:00:00.000Z",
+    "createdYear": "1994",
+    "status": true
+  },
+  {
+    "title": "Fight Club",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/bptfVGEQuv6vDTIMVCHjJ9Dz8PX.jpg",
+    "rating": 8.8,
+    "description": "Tekdüze hayatından bunalan bir adam, karizmatik Tyler Durden’la tanışınca her şey değişir. Kurdukları gizli dövüş kulübü kısa sürede kontrolden çıkar ve daha büyük bir isyana dönüşür. Kimlik ve tüketim kültürü üzerine sarsıcı bir anlatı sunar.",
+    "duration": 139,
+    "releaseDate": "1999-10-15T00:00:00.000Z",
+    "createdYear": "1999",
+    "status": true
+  },
+  {
+    "title": "The Matrix",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/aOIuZAjPaRIE6CMzbazvcHuHXDc.jpg",
+    "rating": 8.7,
+    "description": "Neo, gerçeğin sandığı gibi olmadığını öğrenince insanlığın kaderini değiştirecek bir seçimin eşiğine gelir. Matrix adı verilen simülasyonun sırları açığa çıktıkça, özgür irade ve kader kavgası büyür.",
+    "duration": 136,
+    "releaseDate": "1999-03-31T00:00:00.000Z",
+    "createdYear": "1999",
+    "status": true
+  },
+  {
+    "title": "Interstellar",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg",
+    "rating": 8.6,
+    "description": "Dünya yaşanmaz hale gelirken Cooper, insanlık için yeni bir yuva bulmak üzere uzaya gönderilir. Solucan deliği üzerinden bilinmezliğe yapılan yolculuk, zamanın göreceli yapısıyla duygusal bağları sınar.",
+    "duration": 169,
+    "releaseDate": "2014-11-07T00:00:00.000Z",
+    "createdYear": "2014",
+    "status": true
+  },
+  {
+    "title": "Parasite",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+    "rating": 8.5,
+    "description": "Yoksul Kim ailesi, zengin Park ailesinin evine adım adım sızarak işler bulur. Sınıf farkı ve görünmeyen sınırlar derinleştikçe, ev içindeki dengeler kırılmaya başlar. Kara mizah ve gerilimle ilerleyen güçlü bir toplumsal eleştiridir.",
+    "duration": 132,
+    "releaseDate": "2019-05-30T00:00:00.000Z",
+    "createdYear": "2019",
+    "status": true
+  }
+]

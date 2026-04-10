@@ -1,0 +1,416 @@
+﻿@model AdminCreateCategoryDto
+@{
+    ViewData["Title"] = "Yeni Kategori Ekle";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #eef0f7;
+        --surface: #ffffff;
+        --surface2: #f5f6fb;
+        --border: rgba(30, 40, 100, 0.08);
+        --border-h: rgba(30, 40, 100, 0.16);
+        --border-focus: rgba(91, 78, 248, 0.45);
+        --accent: #5b4ef8;
+        --accent-dim: rgba(91, 78, 248, 0.09);
+        --accent-glow: rgba(91, 78, 248, 0.18);
+        --red: #cc3333;
+        --red-dim: rgba(204, 51, 51, 0.08);
+        --text: #181830;
+        --text-2: #52527a;
+        --text-3: #9898b8;
+        --radius: 10px;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .ca {
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        padding: 2rem 2.5rem 3rem;
+        color: var(--text);
+    }
+
+    /* ── TOP ── */
+    .ca-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .ca-breadcrumb {
+        font-size: 0.75rem;
+        color: var(--text-3);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+    }
+
+    .ca-heading {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    /* ── LAYOUT: dar ortalı kart ── */
+    .ca-center {
+        max-width: 540px;
+    }
+
+    /* ── CARD ── */
+    .ca-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .ca-card::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--accent) 40%, rgba(91, 78, 248, 0.3) 70%, transparent 100%);
+        opacity: 0.5;
+    }
+
+    .ca-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface2);
+    }
+
+    .ca-card-icon {
+        width: 36px;
+        height: 36px;
+        background: var(--accent-dim);
+        border: 1px solid rgba(91, 78, 248, 0.18);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        flex-shrink: 0;
+    }
+
+    .ca-card-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ca-card-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: -0.01em;
+    }
+
+    .ca-card-subtitle {
+        font-size: 0.78rem;
+        color: var(--text-3);
+        margin-top: 0.1rem;
+    }
+
+    .ca-card-body {
+        padding: 1.75rem 1.5rem;
+    }
+
+    /* ── FORM FIELD ── */
+    .ca-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+    }
+
+    .ca-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--text-2);
+        letter-spacing: 0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .ca-label-required {
+        color: var(--accent);
+        font-size: 0.75rem;
+    }
+
+    .ca-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .ca-input-wrap svg {
+        position: absolute;
+        left: 0.9rem;
+        color: var(--text-3);
+        width: 15px;
+        height: 15px;
+        pointer-events: none;
+        transition: color 0.2s;
+    }
+
+    .ca-input {
+        width: 100%;
+        background: var(--surface2);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.75rem 0.9rem 0.75rem 2.6rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .ca-input::placeholder {
+        color: var(--text-3);
+    }
+
+    .ca-input:focus {
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 4px var(--accent-glow);
+        background: var(--surface);
+    }
+
+    .ca-input:focus+svg,
+    .ca-input-wrap:focus-within svg {
+        color: var(--accent);
+    }
+
+    /* validation */
+    .ca-input.is-invalid {
+        border-color: var(--red);
+        box-shadow: 0 0 0 4px var(--red-dim);
+    }
+
+    .ca-hint {
+        font-size: 0.75rem;
+        color: var(--text-3);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .ca-hint svg {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+    }
+
+    /* char counter */
+    .ca-counter {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        color: var(--text-3);
+        margin-left: auto;
+        transition: color 0.2s;
+    }
+
+    .ca-counter.warn {
+        color: var(--red);
+    }
+
+    .ca-label-row {
+        display: flex;
+        align-items: center;
+    }
+
+    /* ── FOOTER ── */
+    .ca-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface2);
+        gap: 0.75rem;
+    }
+
+    .ca-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.55rem 1rem;
+        border-radius: var(--radius);
+        border: 1.5px solid var(--border-h);
+        background: transparent;
+        color: var(--text-2);
+        text-decoration: none;
+        cursor: pointer;
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .ca-back-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .ca-back-btn:hover {
+        border-color: rgba(30, 40, 100, 0.28);
+        color: var(--text);
+        background: var(--surface);
+    }
+
+    .ca-submit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.6rem 1.4rem;
+        border-radius: var(--radius);
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .ca-submit-btn svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .ca-submit-btn:hover {
+        background: #7c6dfa;
+        box-shadow: 0 6px 20px rgba(91, 78, 248, 0.32);
+        transform: translateY(-1px);
+    }
+
+    .ca-submit-btn:active {
+        transform: translateY(0);
+    }
+</style>
+
+<div class="ca">
+    <!-- Top -->
+    <div class="ca-top">
+        <div>
+            <div class="ca-breadcrumb">Admin / Kategoriler / Yeni</div>
+            <h1 class="ca-heading">Yeni Kategori Ekle</h1>
+        </div>
+    </div>
+
+    <!-- Card -->
+    <div class="ca-center">
+        <div class="ca-card">
+
+            <!-- Card header -->
+            <div class="ca-card-header">
+                <div class="ca-card-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M3 7h18M3 12h18M3 17h18" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="ca-card-title">Kategori Bilgileri</div>
+                    <div class="ca-card-subtitle">Yeni bir içerik kategorisi oluşturun</div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form method="post">
+                <div class="ca-card-body">
+                    <div class="ca-field">
+                        <div class="ca-label-row">
+                            <label class="ca-label" asp-for="CategoryName">
+                                Kategori Adı
+                                <span class="ca-label-required">*</span>
+                            </label>
+                            <span class="ca-counter" id="charCounter">0 / 50</span>
+                        </div>
+
+                        <div class="ca-input-wrap">
+                            <input class="ca-input" type="text" id="categoryName" asp-for="CategoryName"
+                                   placeholder="örn. Aksiyon, Komedi, Bilim Kurgu…" maxlength="50" autocomplete="off"
+                                   required />
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 7h18M3 12h18M3 17h18" />
+                            </svg>
+                        </div>
+
+                        <span class="ca-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 16v-4" />
+                                <path d="M12 8h.01" />
+                            </svg>
+                            Kategori adı benzersiz ve açıklayıcı olmalıdır.
+                        </span>
+                    </div>
+
+                </div>
+
+                <!-- Footer -->
+                <div class="ca-card-footer">
+                    <a href="/Admin/AdminCategory/CategoryList" class="ca-back-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7" />
+                        </svg>
+                        Geri Dön
+                    </a>
+
+                    <button type="submit" class="ca-submit-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg>
+                        Kategori Oluştur
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        const input = document.getElementById('categoryName');
+        const counter = document.getElementById('charCounter');
+        const max = 50;
+
+        input?.addEventListener('input', function () {
+            const len = this.value.length;
+            counter.textContent = len + ' / ' + max;
+            counter.classList.toggle('warn', len >= max * 0.85);
+        });
+    })();
+</script>

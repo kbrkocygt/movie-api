@@ -1,0 +1,828 @@
+﻿@model List<AdminResultSeriesDto>
+@{
+    ViewData["Title"] = "Dizi Listesi";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #eef0f7;
+        --surface: #ffffff;
+        --surface2: #f5f6fb;
+        --border: rgba(30, 40, 100, 0.08);
+        --border-h: rgba(30, 40, 100, 0.16);
+        --accent: #5b4ef8;
+        --accent-dim: rgba(91, 78, 248, 0.09);
+        --accent-glow: rgba(91, 78, 248, 0.2);
+        --gold: #b07400;
+        --gold-dim: rgba(176, 116, 0, 0.09);
+        --green: #0a9060;
+        --green-dim: rgba(10, 144, 96, 0.09);
+        --red: #cc3333;
+        --red-dim: rgba(204, 51, 51, 0.08);
+        --amber: #a86000;
+        --amber-dim: rgba(168, 96, 0, 0.09);
+        --text: #181830;
+        --text-2: #52527a;
+        --text-3: #9898b8;
+        --radius: 10px;
+        --row-h: 52px;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mv {
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        padding: 2rem 2.5rem 3rem;
+        color: var(--text);
+    }
+
+    /* ───── TOP BAR ───── */
+    .mv-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+    }
+
+    .mv-breadcrumb {
+        font-size: 0.75rem;
+        color: var(--text-3);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+    }
+
+    .mv-heading {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        line-height: 1;
+    }
+
+    .mv-pill {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        font-weight: 500;
+        color: var(--accent);
+        background: var(--accent-dim);
+        border: 1px solid rgba(124, 109, 250, 0.25);
+        padding: 0.2rem 0.55rem;
+        border-radius: 6px;
+        letter-spacing: 0.02em;
+        align-self: flex-end;
+        margin-bottom: 2px;
+    }
+
+    .mv-spacer {
+        flex: 1;
+    }
+
+    /* toolbar */
+    .mv-toolbar {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .mv-search {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .mv-search svg {
+        position: absolute;
+        left: 0.75rem;
+        color: var(--text-3);
+        width: 14px;
+        height: 14px;
+        pointer-events: none;
+    }
+
+    .mv-search input {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.5rem 0.9rem 0.5rem 2.25rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.825rem;
+        color: var(--text);
+        width: 210px;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s, width 0.25s;
+    }
+
+    .mv-search input::placeholder {
+        color: var(--text-3);
+    }
+
+    .mv-search input:focus {
+        border-color: rgba(124, 109, 250, 0.4);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+        width: 270px;
+    }
+
+    .mv-filter-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.5rem 0.85rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-2);
+        cursor: pointer;
+        transition: border-color 0.2s, color 0.2s;
+    }
+
+    .mv-filter-btn svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    .mv-filter-btn:hover {
+        border-color: var(--border-h);
+        color: var(--text);
+    }
+
+    /* ───── TABLE SHELL ───── */
+    .mv-shell {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* top shimmer line */
+    .mv-shell::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+                transparent 0%,
+                var(--accent) 40%,
+                rgba(91, 78, 248, 0.3) 70%,
+                transparent 100%);
+        opacity: 0.5;
+    }
+
+    /* ───── TABLE ───── */
+    .mv-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: auto;
+    }
+
+    .mv-table colgroup col:nth-child(1) {
+        width: 80px;
+    }
+
+    .mv-table colgroup col:nth-child(2) {
+        width: auto;
+    }
+
+    .mv-table colgroup col:nth-child(3) {
+        width: 100px;
+    }
+
+    .mv-table colgroup col:nth-child(4) {
+        width: 80px;
+    }
+
+    .mv-table colgroup col:nth-child(5) {
+        width: 90px;
+    }
+
+    .mv-table colgroup col:nth-child(6) {
+        width: 260px;
+    }
+
+    /* actions */
+
+    /* head */
+    .mv-table thead th {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-3);
+        padding: 0 1rem;
+        height: 42px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface2);
+        white-space: nowrap;
+    }
+
+    .mv-table thead th:first-child {
+        padding-left: 1.5rem;
+    }
+
+    .mv-table thead th:last-child {
+        padding-right: 1.5rem;
+        text-align: right;
+    }
+
+    /* body rows */
+    .mv-table tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+        position: relative;
+        opacity: 0;
+        animation: fadeRow 0.35s ease forwards;
+    }
+
+    @@keyframes fadeRow {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .mv-table tbody tr:last-child {
+        border-bottom: none;
+    }
+
+    .mv-table tbody tr:hover {
+        background: rgba(91, 78, 248, 0.04);
+    }
+
+    /* row hover: reveal actions */
+    .mv-table tbody tr .mv-actions {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .mv-table tbody tr:hover .mv-actions {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* stagger */
+    .mv-table tbody tr:nth-child(1) {
+        animation-delay: 0.04s;
+    }
+
+    .mv-table tbody tr:nth-child(2) {
+        animation-delay: 0.08s;
+    }
+
+    .mv-table tbody tr:nth-child(3) {
+        animation-delay: 0.12s;
+    }
+
+    .mv-table tbody tr:nth-child(4) {
+        animation-delay: 0.16s;
+    }
+
+    .mv-table tbody tr:nth-child(5) {
+        animation-delay: 0.20s;
+    }
+
+    .mv-table tbody tr:nth-child(6) {
+        animation-delay: 0.24s;
+    }
+
+    .mv-table tbody tr:nth-child(7) {
+        animation-delay: 0.28s;
+    }
+
+    .mv-table tbody tr:nth-child(8) {
+        animation-delay: 0.32s;
+    }
+
+    .mv-table tbody tr:nth-child(9) {
+        animation-delay: 0.36s;
+    }
+
+    .mv-table tbody tr:nth-child(10) {
+        animation-delay: 0.40s;
+    }
+
+    .mv-table tbody td {
+        padding: 0 1rem;
+        height: var(--row-h);
+        font-size: 0.875rem;
+        color: var(--text);
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .mv-table tbody td:nth-child(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 0;
+    }
+
+    .mv-table tbody td:first-child {
+        padding-left: 1.5rem;
+    }
+
+    .mv-table tbody td:last-child {
+        padding-right: 1.5rem;
+    }
+
+    /* id */
+    .mv-id {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        color: var(--text-3);
+    }
+
+    /* title */
+    .mv-name {
+        font-weight: 500;
+        font-size: 0.875rem;
+        letter-spacing: -0.01em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+    }
+
+    /* rating */
+    .mv-rating {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--gold);
+        background: var(--gold-dim);
+        padding: 0.22rem 0.6rem;
+        border-radius: 6px;
+        border: 1px solid rgba(240, 192, 64, 0.18);
+    }
+
+    .mv-rating svg {
+        width: 10px;
+        height: 10px;
+        fill: var(--gold);
+        flex-shrink: 0;
+    }
+
+    /* year */
+    .mv-year {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.78rem;
+        color: var(--text-2);
+    }
+
+    /* status */
+    .mv-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 0.22rem 0.6rem;
+        border-radius: 100px;
+    }
+
+    .mv-status-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        flex-shrink: 0;
+    }
+
+    .mv-status.on {
+        color: var(--green);
+        background: var(--green-dim);
+        border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .mv-status.off {
+        color: var(--red);
+        background: var(--red-dim);
+        border: 1px solid rgba(248, 113, 113, 0.2);
+    }
+
+    /* ───── ACTIONS (icon buttons, hover-reveal) ───── */
+    .mv-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.3rem;
+        transition: opacity 0.18s, transform 0.18s;
+        flex-wrap: nowrap;
+    }
+
+    .mv-icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        height: 30px;
+        padding: 0 0.65rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text-2);
+        cursor: pointer;
+        text-decoration: none;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.75rem;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+        flex-shrink: 0;
+    }
+
+    .mv-icon-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .mv-icon-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .mv-icon-btn.del:hover {
+        background: var(--red-dim);
+        border-color: rgba(248, 113, 113, 0.25);
+        color: var(--red);
+    }
+
+    .mv-icon-btn.upd:hover {
+        background: var(--amber-dim);
+        border-color: rgba(251, 191, 36, 0.25);
+        color: var(--amber);
+    }
+
+    .mv-icon-btn.det:hover {
+        background: var(--accent-dim);
+        border-color: rgba(124, 109, 250, 0.3);
+        color: var(--accent);
+    }
+
+    /* tooltip */
+    .mv-icon-btn {
+        position: relative;
+    }
+
+
+    /* divider between icon groups */
+    .mv-actions-sep {
+        width: 1px;
+        height: 18px;
+        background: var(--border);
+        flex-shrink: 0;
+    }
+
+    /* ───── FOOTER ───── */
+    .mv-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface2);
+    }
+
+    .mv-footer-info {
+        font-size: 0.78rem;
+        color: var(--text-3);
+    }
+
+    .mv-footer-info strong {
+        color: var(--text-2);
+        font-weight: 600;
+    }
+
+    .mv-add-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        padding: 0.55rem 1.1rem;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .mv-add-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .mv-add-btn:hover {
+        background: #9080ff;
+        box-shadow: 0 6px 22px rgba(124, 109, 250, 0.4);
+        transform: translateY(-1px);
+    }
+
+    /* ───── EMPTY ───── */
+    .mv-empty {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--text-3);
+    }
+
+    .mv-empty svg {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.75rem;
+        opacity: 0.25;
+    }
+
+    .mv-empty p {
+        font-size: 0.875rem;
+    }
+
+    /* ───── SORT indicators ───── */
+    th.sortable {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    th.sortable:hover {
+        color: var(--text-2);
+    }
+
+    th.sortable svg {
+        width: 10px;
+        height: 10px;
+        display: inline;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+</style>
+
+<div class="mv">
+
+    <!-- Top bar -->
+    <div class="mv-top">
+        <div>
+            <div class="mv-breadcrumb">Admin / Diziler</div>
+            <div style="display:flex;align-items:baseline;gap:0.6rem">
+                <h1 class="mv-heading">Dizi Listesi</h1>
+                <span class="mv-pill">@Model.Count kayıt</span>
+            </div>
+        </div>
+
+        <div class="mv-spacer"></div>
+
+        <div class="mv-toolbar">
+            <!-- Search -->
+            <div class="mv-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input type="text" id="mvSearch" placeholder="Dizi veya ID ara…" autocomplete="off">
+            </div>
+
+            <!-- Filter toggle (UI only, extend as needed) -->
+            <button class="mv-filter-btn" id="mvFilterBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round">
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="8" y1="12" x2="16" y2="12" />
+                    <line x1="11" y1="18" x2="13" y2="18" />
+                </svg>
+                Filtrele
+            </button>
+        </div>
+    </div>
+
+    <!-- Table shell -->
+    <div class="mv-shell">
+        <div style="overflow-x:auto">
+            <table class="mv-table" id="mvTable">
+                <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th class="sortable" data-col="1">
+                            Dizi Adı
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 15l5 5 5-5" />
+                                <path d="M7 9l5-5 5 5" />
+                            </svg>
+                        </th>
+                        <th class="sortable" data-col="2">
+                            Rating
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 15l5 5 5-5" />
+                                <path d="M7 9l5-5 5 5" />
+                            </svg>
+                        </th>
+                        <th class="sortable" data-col="3">
+                            Yıl
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 15l5 5 5-5" />
+                                <path d="M7 9l5-5 5 5" />
+                            </svg>
+                        </th>
+                        <th>Durum</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody id="mvBody">
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td><span class="mv-id">@count</span></td>
+
+                                <td>
+                                    <span class="mv-name" title="@item.Title">@item.Title</span>
+                                </td>
+
+                                <td>
+                                    <span class="mv-rating">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                        </svg>
+                                        @item.Rating
+                                    </span>
+                                </td>
+
+                                <td><span class="mv-year">@item.CreatedYear</span></td>
+
+                                <td>
+                                    @if (item.Status == true)
+                                    {
+                                        <span class="mv-status on"><span class="mv-status-dot"></span>Aktif</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="mv-status off"><span class="mv-status-dot"></span>Pasif</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="mv-actions">
+                                        <a href="/Admin/AdminSeries/DetailsSeries?id=@item.SeriesId" class="mv-icon-btn det"
+                                               data-tip="Detaylar">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                            <span>Detay</span>
+                                        </a>
+                                        <a href="/Admin/AdminSeries/UpdateSeries?id=@item.SeriesId" class="mv-icon-btn upd"
+                                               data-tip="Güncelle">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                            </svg>
+                                            <span>Düzenle</span>
+                                        </a>
+                                        <span class="mv-actions-sep"></span>
+                                        <a href="/Admin/AdminSeries/DeleteSeries/@item.SeriesId" class="mv-icon-btn del"
+                                               data-tip="Sil">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="3 6 5 6 21 6" />
+                                                <path d="M19 6l-1 14H6L5 6" />
+                                                <path d="M10 11v6M14 11v6" />
+                                                <path d="M9 6V4h6v2" />
+                                            </svg>
+                                            <span>Sil</span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6">
+                                <div class="mv-empty">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                                        <path d="M10 9l5 3-5 3V9z" />
+                                    </svg>
+                                    <p>Henüz dizi eklenmemiş.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="mv-footer">
+            <span class="mv-footer-info">Toplam <strong>@Model.Count</strong> dizi &nbsp;·&nbsp; <span
+                id="mvVisible">@Model.Count</span> gösteriliyor</span>
+                <a href="/Admin/AdminSeries/CreateSeries" class="mv-add-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path d="M12 5v14M5 12h14" />
+                    </svg>
+                    Yeni Dizi Ekle
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // ── Search ──
+            const searchEl = document.getElementById('mvSearch');
+            const bodyEl = document.getElementById('mvBody');
+            const visibleEl = document.getElementById('mvVisible');
+
+            function updateVisible() {
+                const rows = bodyEl.querySelectorAll('tr');
+                let count = 0;
+                rows.forEach(r => { if (r.style.display !== 'none') count++; });
+                if (visibleEl) visibleEl.textContent = count;
+            }
+
+            searchEl?.addEventListener('input', function () {
+                const q = this.value.toLowerCase().trim();
+                bodyEl.querySelectorAll('tr').forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(q) ? '' : 'none';
+                });
+                updateVisible();
+            });
+
+            // ── Sort ──
+            let sortState = { col: null, asc: true };
+
+            document.querySelectorAll('th.sortable').forEach(th => {
+                th.addEventListener('click', function () {
+                    const col = parseInt(this.dataset.col);
+                    if (sortState.col === col) sortState.asc = !sortState.asc;
+                    else { sortState.col = col; sortState.asc = true; }
+
+                    const rows = Array.from(bodyEl.querySelectorAll('tr'));
+                    rows.sort((a, b) => {
+                        const aVal = a.cells[col]?.textContent.trim() ?? '';
+                        const bVal = b.cells[col]?.textContent.trim() ?? '';
+                        const aNum = parseFloat(aVal.replace(',', '.'));
+                        const bNum = parseFloat(bVal.replace(',', '.'));
+                        if (!isNaN(aNum) && !isNaN(bNum))
+                            return sortState.asc ? aNum - bNum : bNum - aNum;
+                        return sortState.asc
+                            ? aVal.localeCompare(bVal, 'tr')
+                            : bVal.localeCompare(aVal, 'tr');
+                    });
+
+                    rows.forEach(r => bodyEl.appendChild(r));
+                });
+            });
+        })();
+    </script>

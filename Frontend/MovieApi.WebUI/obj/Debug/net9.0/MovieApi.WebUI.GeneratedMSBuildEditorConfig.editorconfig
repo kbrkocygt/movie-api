@@ -1,0 +1,191 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v9.0
+build_property.RootNamespace = MovieApi.WebUI
+build_property.RootNamespace = MovieApi.WebUI
+build_property.ProjectDir = /Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminCategory/CategoryList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5DYXRlZ29yeS9DYXRlZ29yeUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminCategory/CreateCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5DYXRlZ29yeS9DcmVhdGVDYXRlZ29yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminMovie/CreateMovie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5Nb3ZpZS9DcmVhdGVNb3ZpZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminMovie/MovieList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5Nb3ZpZS9Nb3ZpZUxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminReview/ReviewList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5SZXZpZXcvUmV2aWV3TGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminSeries/CreateSeries.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5TZXJpZXMvQ3JlYXRlU2VyaWVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/AdminSeries/SeriesList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQWRtaW5TZXJpZXMvU2VyaWVzTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Areas/Admin/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/AdminLayout/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRtaW5MYXlvdXQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Login/SignIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vU2lnbkluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Movie/MovieDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWUvTW92aWVEZXRhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Movie/MovieList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTW92aWUvTW92aWVMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Register/SignUp.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVnaXN0ZXIvU2lnblVwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_AdminLayoutBreadCrumbComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0FkbWluTGF5b3V0QnJlYWRDcnVtYkNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_AdminLayoutHeaderComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0FkbWluTGF5b3V0SGVhZGVyQ29tcG9uZW50UGFydGlhbC9EZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_AdminLayoutScriptsComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0FkbWluTGF5b3V0U2NyaXB0c0NvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_AdminLayoutSidebarComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0FkbWluTGF5b3V0U2lkZWJhckNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_AdminLayoutSwitcherComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0FkbWluTGF5b3V0U3dpdGNoZXJDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_HeadAdminLayoutComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX0hlYWRBZG1pbkxheW91dENvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_MovieDetailOverviewComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX01vdmllRGV0YWlsT3ZlcnZpZXdDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_MovieDetailRateComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX01vdmllRGV0YWlsUmF0ZUNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_MovieDetailRelatedMoviesComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX01vdmllRGV0YWlsUmVsYXRlZE1vdmllc0NvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_MovieDetailReviewComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX01vdmllRGV0YWlsUmV2aWV3Q29tcG9uZW50UGFydGlhbC9EZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_MovieDetailShareSocialMediaComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX01vdmllRGV0YWlsU2hhcmVTb2NpYWxNZWRpYUNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_MovieImageAndWatchTrailerComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX01vdmllSW1hZ2VBbmRXYXRjaFRyYWlsZXJDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUIFooterComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSUZvb3RlckNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUIHeadComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSUhlYWRDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUIHeroComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSUhlcm9Db21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUILoginModalComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSUxvZ2luTW9kYWxDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUINavbarComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSU5hdmJhckNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUIPreloaderComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSVByZWxvYWRlckNvbXBvbmVudFBhcnRpYWwvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Components/_UserLayoutWebUIRegisterModalComponentPartial/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvX1VzZXJMYXlvdXRXZWJVSVJlZ2lzdGVyTW9kYWxDb21wb25lbnRQYXJ0aWFsL0RlZmF1bHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/UserWebUILayout/LayoutUI.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlcldlYlVJTGF5b3V0L0xheW91dFVJLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/kubrakocyigitoktay/Desktop/movieApp/Frontend/MovieApi.WebUI/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-srykyqrz1d

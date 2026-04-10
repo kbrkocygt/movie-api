@@ -1,0 +1,877 @@
+﻿@model AdminCreateMovieDto
+@{
+    ViewData["Title"] = "Yeni Film Ekle";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+rel="stylesheet">
+
+<style>
+    :root {
+        --bg: #eef0f7;
+        --surface: #ffffff;
+        --surface2: #f5f6fb;
+        --border: rgba(30, 40, 100, 0.08);
+        --border-h: rgba(30, 40, 100, 0.16);
+        --border-focus: rgba(91, 78, 248, 0.45);
+        --accent: #5b4ef8;
+        --accent-dim: rgba(91, 78, 248, 0.09);
+        --accent-glow: rgba(91, 78, 248, 0.18);
+        --gold: #b07400;
+        --gold-dim: rgba(176, 116, 0, 0.09);
+        --red: #cc3333;
+        --red-dim: rgba(204, 51, 51, 0.08);
+        --green: #0a9060;
+        --green-dim: rgba(10, 144, 96, 0.09);
+        --text: #181830;
+        --text-2: #52527a;
+        --text-3: #9898b8;
+        --radius: 10px;
+    }
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mf {
+        font-family: 'Outfit', sans-serif;
+        background: var(--bg);
+        min-height: 100vh;
+        padding: 2rem 2.5rem 3rem;
+        color: var(--text);
+    }
+
+    /* ── TOP ── */
+    .mf-breadcrumb {
+        font-size: 0.75rem;
+        color: var(--text-3);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 0.2rem;
+    }
+
+    .mf-heading {
+        font-size: 1.45rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        color: var(--text);
+        margin-bottom: 1.75rem;
+    }
+
+    /* ── GRID LAYOUT ── */
+    .mf-grid {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 1.25rem;
+        align-items: start;
+    }
+
+    @@media (max-width: 900px) {
+        .mf-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ── CARD ── */
+    .mf-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .mf-card::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--accent) 40%, rgba(91, 78, 248, 0.3) 70%, transparent 100%);
+        opacity: 0.5;
+    }
+
+    .mf-card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1.1rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface2);
+    }
+
+    .mf-card-icon {
+        width: 34px;
+        height: 34px;
+        background: var(--accent-dim);
+        border: 1px solid rgba(91, 78, 248, 0.18);
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent);
+        flex-shrink: 0;
+    }
+
+    .mf-card-icon svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .mf-card-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .mf-card-subtitle {
+        font-size: 0.75rem;
+        color: var(--text-3);
+        margin-top: 0.1rem;
+    }
+
+    .mf-card-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    /* ── FIELD ── */
+    .mf-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .mf-field-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .mf-label-row {
+        display: flex;
+        align-items: center;
+    }
+
+    .mf-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--text-2);
+        letter-spacing: 0.02em;
+    }
+
+    .mf-required {
+        color: var(--accent);
+        font-size: 0.72rem;
+        margin-left: 2px;
+    }
+
+    .mf-counter {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        color: var(--text-3);
+        margin-left: auto;
+        transition: color 0.2s;
+    }
+
+    .mf-counter.warn {
+        color: var(--red);
+    }
+
+    /* inputs */
+    .mf-input-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .mf-input-wrap .mf-ico {
+        position: absolute;
+        left: 0.85rem;
+        color: var(--text-3);
+        width: 14px;
+        height: 14px;
+        pointer-events: none;
+        transition: color 0.2s;
+        flex-shrink: 0;
+    }
+
+    .mf-input-wrap:focus-within .mf-ico {
+        color: var(--accent);
+    }
+
+    .mf-input {
+        width: 100%;
+        background: var(--surface2);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.7rem 0.9rem 0.7rem 2.5rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.875rem;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    .mf-input::placeholder {
+        color: var(--text-3);
+    }
+
+    .mf-input:focus {
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 4px var(--accent-glow);
+        background: var(--surface);
+    }
+
+    textarea.mf-input {
+        resize: vertical;
+        min-height: 110px;
+        padding-top: 0.75rem;
+        line-height: 1.55;
+    }
+
+    /* rating özel — mono font */
+    input[type="number"].mf-input {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+    }
+
+    .mf-hint {
+        font-size: 0.72rem;
+        color: var(--text-3);
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .mf-hint svg {
+        width: 11px;
+        height: 11px;
+        flex-shrink: 0;
+    }
+
+    /* ── COVER PREVIEW (sağ kart) ── */
+    .mf-preview-box {
+        width: 100%;
+        aspect-ratio: 2/3;
+        background: var(--surface2);
+        border: 2px dashed var(--border-h);
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--text-3);
+        font-size: 0.78rem;
+        overflow: hidden;
+        transition: border-color 0.2s;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .mf-preview-box:hover {
+        border-color: rgba(91, 78, 248, 0.35);
+    }
+
+    .mf-preview-box svg {
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+    }
+
+    .mf-preview-box img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .mf-preview-label {
+        font-size: 0.72rem;
+        color: var(--text-3);
+        text-align: center;
+        padding: 0 1rem;
+        line-height: 1.4;
+    }
+
+    /* status toggle */
+    .mf-toggle-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.85rem 1rem;
+        background: var(--surface2);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: border-color 0.2s;
+    }
+
+    .mf-toggle-wrap:hover {
+        border-color: var(--border-h);
+    }
+
+    .mf-toggle-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+    }
+
+    .mf-toggle-name {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+
+    .mf-toggle-desc {
+        font-size: 0.72rem;
+        color: var(--text-3);
+    }
+
+    /* switch */
+    .mf-switch {
+        position: relative;
+        width: 42px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    .mf-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .mf-switch-track {
+        position: absolute;
+        inset: 0;
+        background: var(--border-h);
+        border-radius: 99px;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+    .mf-switch-track::after {
+        content: '';
+        position: absolute;
+        left: 3px;
+        top: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s;
+    }
+
+    .mf-switch input:checked+.mf-switch-track {
+        background: var(--accent);
+    }
+
+    .mf-switch input:checked+.mf-switch-track::after {
+        transform: translateX(18px);
+    }
+
+    /* ── FOOTER ── */
+    .mf-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface2);
+        gap: 0.75rem;
+    }
+
+    .mf-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 0.55rem 1rem;
+        border-radius: var(--radius);
+        border: 1.5px solid var(--border-h);
+        background: transparent;
+        color: var(--text-2);
+        text-decoration: none;
+        cursor: pointer;
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .mf-back-btn svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .mf-back-btn:hover {
+        border-color: rgba(30, 40, 100, 0.28);
+        color: var(--text);
+        background: var(--surface);
+    }
+
+    .mf-submit-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding: 0.6rem 1.5rem;
+        border-radius: var(--radius);
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .mf-submit-btn svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .mf-submit-btn:hover {
+        background: #7c6dfa;
+        box-shadow: 0 6px 20px rgba(91, 78, 248, 0.32);
+        transform: translateY(-1px);
+    }
+
+    .mf-submit-btn:active {
+        transform: translateY(0);
+    }
+
+    /* rating bar preview */
+    .mf-rating-preview {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.2rem;
+    }
+
+    .mf-rating-bar-bg {
+        flex: 1;
+        height: 4px;
+        background: var(--gold-dim);
+        border-radius: 99px;
+        overflow: hidden;
+    }
+
+    .mf-rating-bar-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #e6a817, #f0c040);
+        border-radius: 99px;
+        transition: width 0.3s ease;
+        width: 0%;
+    }
+
+    .mf-rating-val {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        color: var(--gold);
+        font-weight: 500;
+        min-width: 28px;
+        text-align: right;
+    }
+</style>
+
+<div class="mf">
+
+    <div class="mf-breadcrumb">Admin / Filmler / Yeni</div>
+    <h1 class="mf-heading">Yeni Film Ekle</h1>
+
+    <form method="post">
+        <div class="mf-grid">
+
+            <!-- ── SOL: Ana bilgiler ── -->
+            <div style="display:flex;flex-direction:column;gap:1.25rem;">
+
+                <!-- Temel Bilgiler -->
+                <div class="mf-card">
+                    <div class="mf-card-header">
+                        <div class="mf-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                 stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="M10 9l5 3-5 3V9z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="mf-card-title">Temel Bilgiler</div>
+                            <div class="mf-card-subtitle">Film adı, açıklama ve kapak görseli</div>
+                        </div>
+                    </div>
+
+                    <div class="mf-card-body">
+
+                        <!-- Başlık -->
+                        <div class="mf-field">
+                            <div class="mf-label-row">
+                                <label class="mf-label" for="title">Film Adı <span class="mf-required">*</span></label>
+                                <span class="mf-counter" id="titleCounter">0 / 150</span>
+                            </div>
+                            <div class="mf-input-wrap">
+                                <svg class="mf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 6h16M4 12h16M4 18h7" />
+                                </svg>
+                                <input class="mf-input" type="text" id="title" name="Title" asp-for="Title"
+                                       placeholder="örn. The Shawshank Redemption" maxlength="150" autocomplete="off"
+                                       required />
+                            </div>
+                        </div>
+
+                        <!-- Açıklama -->
+                        <div class="mf-field">
+                            <div class="mf-label-row">
+                                <label class="mf-label" for="description">Açıklama <span
+                                    class="mf-required">*</span></label>
+                                    <span class="mf-counter" id="descCounter">0 / 1000</span>
+                                </div>
+                                <div class="mf-input-wrap">
+                                    <svg class="mf-ico" style="top:0.8rem;align-self:flex-start;position:absolute;"
+                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                    </svg>
+                                    <textarea class="mf-input" id="description" name="Description" asp-for="Description"
+                                              placeholder="Film hakkında kısa bir açıklama yazın…" maxlength="1000"></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Kapak URL -->
+                            <div class="mf-field">
+                                <label class="mf-label" for="coverImageUrl">Kapak Görseli URL <span
+                                    class="mf-required">*</span></label>
+                                    <div class="mf-input-wrap">
+                                        <svg class="mf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                                            <circle cx="8.5" cy="8.5" r="1.5" />
+                                            <polyline points="21 15 16 10 5 21" />
+                                        </svg>
+                                        <input class="mf-input" type="url" id="coverImageUrl" name="CoverImageUrl"
+                                               asp-for="CoverImageUrl" placeholder="https://…/poster.jpg" autocomplete="off" />
+                                    </div>
+                                    <span class="mf-hint">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                             stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10" />
+                                            <path d="M12 16v-4" />
+                                            <path d="M12 8h.01" />
+                                        </svg>
+                                        URL girince sağdaki önizleme otomatik güncellenir.
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Detaylar -->
+                        <div class="mf-card">
+                            <div class="mf-card-header">
+                                <div class="mf-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v4l3 3" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="mf-card-title">Film Detayları</div>
+                                    <div class="mf-card-subtitle">Rating, süre ve tarih bilgileri</div>
+                                </div>
+                            </div>
+
+                            <div class="mf-card-body">
+
+                                <!-- Rating + Süre -->
+                                <div class="mf-field-row">
+                                    <div class="mf-field">
+                                        <label class="mf-label" for="rating">Rating <span class="mf-required">*</span></label>
+                                        <div class="mf-input-wrap">
+                                            <svg class="mf-ico" viewBox="0 0 24 24">
+                                                <path fill="var(--text-3)"
+                                                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                            </svg>
+                                            <input class="mf-input" type="number" id="rating" name="Rating" asp-for="Rating"
+                                                   placeholder="0.00" min="0" max="10" step="0.01" />
+                                        </div>
+                                        <div class="mf-rating-preview">
+                                            <div class="mf-rating-bar-bg">
+                                                <div class="mf-rating-bar-fill" id="ratingBar"></div>
+                                            </div>
+                                            <span class="mf-rating-val" id="ratingVal">—</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mf-field">
+                                        <label class="mf-label" for="duration">Süre (dk) <span
+                                            class="mf-required">*</span></label>
+                                            <div class="mf-input-wrap">
+                                                <svg class="mf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="10" />
+                                                    <polyline points="12 6 12 12 16 14" />
+                                                </svg>
+                                                <input class="mf-input" type="number" id="duration" name="Duration"
+                                                       asp-for="Duration" placeholder="örn. 142" min="1" />
+                                            </div>
+                                            <span class="mf-hint" id="durationHint"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Çıkış tarihi + Yıl -->
+                                    <div class="mf-field-row">
+                                        <div class="mf-field">
+                                            <label class="mf-label" for="releaseDate">Çıkış Tarihi <span
+                                                class="mf-required">*</span></label>
+                                                <div class="mf-input-wrap">
+                                                    <svg class="mf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <rect x="3" y="4" width="18" height="18" rx="2" />
+                                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                                    </svg>
+                                                    <input class="mf-input" type="date" id="releaseDate" name="ReleaseDate"
+                                                           asp-for="ReleaseDate" />
+                                                </div>
+                                            </div>
+                                            <!-- Kategori Seçimi -->
+                                            <div class="mf-field">
+                                                <label class="mf-label">Kategori <span class="mf-required">*</span></label>
+
+                                                <div class="mf-input-wrap">
+                                                    <svg class="mf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path d="M3 7l9 6 9-6-9-6-9 6z" />
+                                                        <path d="M21 10l-9 6-9-6" />
+                                                    </svg>
+
+                                                    <select class="mf-input" asp-for="CategoryId" asp-items="ViewBag.Categories">
+                                                        <option value="">Kategori seçiniz</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mf-field">
+                                           
+                                                <label class="mf-label" for="createdYear">Yapım Yılı <span
+                                                    class="mf-required">*</span></label>
+                                                    <div class="mf-input-wrap">
+                                                        <svg class="mf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path
+                                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                                        </svg>
+                                                        <input class="mf-input" type="text" id="createdYear" name="CreatedYear"
+                                                               asp-for="CreatedYear" placeholder="örn. 1994" maxlength="4" pattern="\d{4}" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- ── SAĞ: Önizleme + Durum ── -->
+                                <div style="display:flex;flex-direction:column;gap:1.25rem;">
+
+                                    <!-- Kapak Önizleme -->
+                                    <div class="mf-card">
+                                        <div class="mf-card-header">
+                                            <div class="mf-card-icon">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round">
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                                    <polyline points="21 15 16 10 5 21" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="mf-card-title">Kapak Önizleme</div>
+                                                <div class="mf-card-subtitle">Poster görünümü</div>
+                                            </div>
+                                        </div>
+                                        <div class="mf-card-body">
+                                            <div class="mf-preview-box" id="previewBox">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                                                    <circle cx="8.5" cy="8.5" r="1.5" />
+                                                    <polyline points="21 15 16 10 5 21" />
+                                                </svg>
+                                                <span class="mf-preview-label">Kapak URL'si girilince<br>burada görünür</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Durum -->
+                                    <div class="mf-card">
+                                        <div class="mf-card-header">
+                                            <div class="mf-card-icon">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="mf-card-title">Yayın Durumu</div>
+                                                <div class="mf-card-subtitle">Film görünürlüğü</div>
+                                            </div>
+                                        </div>
+                                        <div class="mf-card-body">
+                                            <label class="mf-toggle-wrap" for="statusToggle">
+                                                <div class="mf-toggle-info">
+                                                    <span class="mf-toggle-name" id="statusLabel">Aktif</span>
+                                                    <span class="mf-toggle-desc" id="statusDesc">Film kullanıcılara görünür</span>
+                                                </div>
+                                                <label class="mf-switch">
+                                                    <input type="checkbox" id="statusToggle" name="Status" asp-for="Status" checked />
+                                                    <span class="mf-switch-track"></span>
+                                                </label>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Footer butonları (sağ kolonda) -->
+                                    <div class="mf-card">
+                                        <div class="mf-card-footer" style="border-top:none;border-radius:16px;">
+                                            <a href="/Admin/AdminMovie/MovieList" class="mf-back-btn">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                                                </svg>
+                                                Geri Dön
+                                            </a>
+                                            <button type="submit" class="mf-submit-btn">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                     stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M12 5v14M5 12h14" />
+                                                </svg>
+                                                Film Ekle
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <script>
+                        (function () {
+                            // ── Karakter sayaçları ──
+                            function bindCounter(inputId, counterId, max) {
+                                const el = document.getElementById(inputId);
+                                const ct = document.getElementById(counterId);
+                                if (!el || !ct) return;
+                                el.addEventListener('input', () => {
+                                    const len = el.value.length;
+                                    ct.textContent = len + ' / ' + max;
+                                    ct.classList.toggle('warn', len >= max * 0.85);
+                                });
+                            }
+
+                            bindCounter('title', 'titleCounter', 150);
+                            bindCounter('description', 'descCounter', 1000);
+
+                            // ── Kapak önizleme ──
+                            const coverInput = document.getElementById('coverImageUrl');
+                            const previewBox = document.getElementById('previewBox');
+
+                            coverInput?.addEventListener('input', function () {
+                                const url = this.value.trim();
+                                const existing = previewBox.querySelector('img');
+
+                                if (url) {
+                                    if (!existing) {
+                                        const img = document.createElement('img');
+                                        img.alt = 'Kapak';
+                                        previewBox.appendChild(img);
+                                        // placeholder'ları gizle
+                                        previewBox.querySelectorAll('svg, .mf-preview-label').forEach(e => e.style.display = 'none');
+                                    }
+                                    previewBox.querySelector('img').src = url;
+                                } else {
+                                    if (existing) existing.remove();
+                                    previewBox.querySelectorAll('svg, .mf-preview-label').forEach(e => e.style.display = '');
+                                }
+                            });
+
+                            // ── Rating bar ──
+                            const ratingInput = document.getElementById('rating');
+                            const ratingBar = document.getElementById('ratingBar');
+                            const ratingVal = document.getElementById('ratingVal');
+
+                            ratingInput?.addEventListener('input', function () {
+                                const v = parseFloat(this.value);
+                                if (!isNaN(v) && v >= 0 && v <= 10) {
+                                    ratingBar.style.width = (v / 10 * 100) + '%';
+                                    ratingVal.textContent = v.toFixed(2);
+                                } else {
+                                    ratingBar.style.width = '0%';
+                                    ratingVal.textContent = '—';
+                                }
+                            });
+
+                            // ── Süre → saat:dakika göster ──
+                            const durationInput = document.getElementById('duration');
+                            const durationHint = document.getElementById('durationHint');
+
+                            durationInput?.addEventListener('input', function () {
+                                const min = parseInt(this.value);
+                                if (!isNaN(min) && min > 0) {
+                                    const h = Math.floor(min / 60);
+                                    const m = min % 60;
+                                    durationHint.textContent = h > 0 ? h + ' sa ' + m + ' dk' : m + ' dk';
+                                } else {
+                                    durationHint.textContent = '';
+                                }
+                            });
+
+                            // ── Status toggle label ──
+                            const statusToggle = document.getElementById('statusToggle');
+                            const statusLabel = document.getElementById('statusLabel');
+                            const statusDesc = document.getElementById('statusDesc');
+
+                            statusToggle?.addEventListener('change', function () {
+                                if (this.checked) {
+                                    statusLabel.textContent = 'Aktif';
+                                    statusDesc.textContent = 'Film kullanıcılara görünür';
+                                } else {
+                                    statusLabel.textContent = 'Pasif';
+                                    statusDesc.textContent = 'Film gizlenmiş durumda';
+                                }
+                            });
+
+                            // ── Çıkış tarihi → yıl alanını otomatik doldur ──
+                            const releaseDateInput = document.getElementById('releaseDate');
+                            const createdYearInput = document.getElementById('createdYear');
+
+                            releaseDateInput?.addEventListener('change', function () {
+                                if (this.value && !createdYearInput.value) {
+                                    createdYearInput.value = this.value.split('-')[0];
+                                }
+                            });
+                        })();
+                    </script>

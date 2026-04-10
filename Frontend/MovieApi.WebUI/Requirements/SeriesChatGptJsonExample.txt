@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Breaking Bad",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
+    "rating": 9.5,
+    "description": "Lise kimya öğretmeni Walter White, kanser teşhisi sonrası ailesine maddi güvence bırakmak için eski öğrencisi Jesse ile metamfetamin üretimine girer. Küçük bir “çözüm” diye başlayan yol, güç, suç ve vicdanın çatıştığı karanlık bir dönüşüme evrilir.",
+    "duration": 47,
+    "releaseDate": "2008-01-20T00:00:00.000Z",
+    "createdYear": "2008",
+    "status": true
+  },
+  {
+    "title": "Game of Thrones",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg",
+    "rating": 9.2,
+    "description": "Westeros’ta soylu haneler Demir Taht için acımasız bir güç savaşına tutuşur. Entrikalar, ittifaklar ve ihanetler arasında kuzeyden yaklaşan kadim tehdit büyür. Taht oyunlarında herkesin bir bedel ödeyeceği epik bir fantastik destandır.",
+    "duration": 57,
+    "releaseDate": "2011-04-17T00:00:00.000Z",
+    "createdYear": "2011",
+    "status": true
+  },
+  {
+    "title": "Stranger Things",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+    "rating": 8.7,
+    "description": "Hawkins kasabasında bir çocuğun kaybolması, gizli deneyler ve doğaüstü bir dünyanın kapısını aralar. Arkadaş grubu, telekinetik güçlere sahip gizemli bir kızla tanışınca olaylar hızla derinleşir. 80’ler nostaljisi ve gerilim iç içe akar.",
+    "duration": 50,
+    "releaseDate": "2016-07-15T00:00:00.000Z",
+    "createdYear": "2016",
+    "status": true
+  },
+  {
+    "title": "The Office (US)",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg",
+    "rating": 8.9,
+    "description": "Scranton’daki Dunder Mifflin ofisinde sıradan bir iş günü, absürt patron Michael Scott ve rengârenk ekip sayesinde her an kaosa dönebilir. Belgesel tarzı anlatımıyla iş yeri mizahını, samimi arkadaşlıkları ve küçük zaferleri eğlenceli biçimde sunar.",
+    "duration": 22,
+    "releaseDate": "2005-03-24T00:00:00.000Z",
+    "createdYear": "2005",
+    "status": true
+  },
+  {
+    "title": "Friends",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/2koX1xLkpTQM4IZebYvKysFW1Nh.jpg",
+    "rating": 8.8,
+    "description": "New York’ta hayatı birlikte göğüsleyen altı arkadaş; kariyer, aşk, hayal kırıklıkları ve “kahve molaları” arasında büyür. Rachel, Ross, Monica, Chandler, Joey ve Phoebe’nin sıcak dostluğu; esprili diyaloglar ve unutulmaz anlarla yıllara yayılır.",
+    "duration": 22,
+    "releaseDate": "1994-09-22T00:00:00.000Z",
+    "createdYear": "1994",
+    "status": true
+  },
+  {
+    "title": "Sherlock",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/cIfGAkpvWD2zxHrXzhv3uptYbyV.jpg",
+    "rating": 9.1,
+    "description": "Modern Londra’da dâhi dedektif Sherlock Holmes, doktor John Watson ile birlikte karmaşık vakaları çözer. Keskin zekâ, hızlı tempo ve güçlü karakter dinamikleri öne çıkar. Her bölüm, ipuçları ve ters köşelerle dolu sinematik bir bulmaca gibi ilerler.",
+    "duration": 90,
+    "releaseDate": "2010-07-25T00:00:00.000Z",
+    "createdYear": "2010",
+    "status": true
+  },
+  {
+    "title": "The Crown",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/1DDE0Z2Y805rqfkEjPbZsMLyPwa.jpg",
+    "rating": 8.6,
+    "description": "Kraliçe II. Elizabeth’in tahta çıkışıyla başlayan hikâye, monarşinin iç yüzünü ve siyasi krizlerin saray üzerindeki etkisini anlatır. Güç, görev, aile ve kamuoyu baskısı arasında verilen kararlar; dönem atmosferi ve güçlü oyunculuklarla dramatik bir portreye dönüşür.",
+    "duration": 58,
+    "releaseDate": "2016-11-04T00:00:00.000Z",
+    "createdYear": "2016",
+    "status": true
+  },
+  {
+    "title": "The Mandalorian",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/eU1i6eHXlzMOlEq0ku1Rzq7Y4wA.jpg",
+    "rating": 8.7,
+    "description": "İmparatorluk’un çöküşünden sonra galaksi düzensizlik içindeyken, yalnız bir ödül avcısı uzak gezegenlerde hayatta kalmaya çalışır. Beklenmedik bir görev onu “çocuk” ile bağ kurmaya zorlar. Western tonunda, macera ve aksiyonla ilerleyen Star Wars evreni hikâyesidir.",
+    "duration": 40,
+    "releaseDate": "2019-11-12T00:00:00.000Z",
+    "createdYear": "2019",
+    "status": true
+  },
+  {
+    "title": "Chernobyl",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/hlLXt2tOPT6RRnjiUmoxyG1LTFi.jpg",
+    "rating": 9.3,
+    "description": "1986’da Çernobil’de yaşanan nükleer felaketin ardından, gerçeği ortaya çıkarmaya çalışan bilim insanları ve yetkililer zamanla yarışır. İhmaller, bürokrasi ve korku; binlerce insanın kaderini belirler. Gerilimli anlatımıyla, yalanın bedelini sarsıcı biçimde gösterir.",
+    "duration": 65,
+    "releaseDate": "2019-05-06T00:00:00.000Z",
+    "createdYear": "2019",
+    "status": true
+  },
+  {
+    "title": "Dark",
+    "coverImageUrl": "https://image.tmdb.org/t/p/w500/1DLjjvSWMYo17B7wuz6YikB96hH.jpg",
+    "rating": 8.8,
+    "description": "Almanya’nın Winden kasabasında bir çocuğun kaybolması, dört ailenin birbirine geçmiş sırlarını açığa çıkarır. Zaman döngüleri, kuşaklar arası bağlantılar ve kader teması giderek derinleşir. Her detayın bir şeye bağlandığı, zihin yoran bir bilimkurgu gizemidir.",
+    "duration": 55,
+    "releaseDate": "2017-12-01T00:00:00.000Z",
+    "createdYear": "2017",
+    "status": true
+  }
+]

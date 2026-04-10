@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Requirements/StitchAI/StitchAIChatGPTCodePromt.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas/Admin/Views/AdminCategory/" />
+    <Folder Include="Areas/Admin/Views/AdminReview/" />
+    <Folder Include="Areas/Admin/Views/AdminSeries/" />
+    <Folder Include="ViewComponents/AdminLayoutViewComponent/" />
+    <Folder Include="Views/AdminLayout/" />
+    <Folder Include="Views/Login/" />
+    <Folder Include="Views/Movie/" />
+    <Folder Include="Views/Register/" />
+    <Folder Include="Views/Shared/Components/" />
+    <Folder Include="Views/Shared/Components/_AdminLayoutBreadCrumbComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_AdminLayoutHeaderComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_AdminLayoutScriptsComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_AdminLayoutSidebarComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_AdminLayoutSwitcherComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_HeadAdminLayoutComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_MovieDetailOverviewComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_MovieDetailRateComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_MovieDetailRelatedMoviesComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_MovieDetailReviewComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_MovieDetailShareSocialMediaComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_MovieImageAndWatchTrailerComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUIFooterComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUIHeadComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUIHeroComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUILoginModalComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUINavbarComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUIPreloaderComponentPartial/" />
+    <Folder Include="Views/Shared/Components/_UserLayoutWebUIRegisterModalComponentPartial/" />
+    <Folder Include="Views/UserWebUILayout/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../MovieApi.Dto/MovieApi.Dto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+  </ItemGroup>
+
+</Project>
